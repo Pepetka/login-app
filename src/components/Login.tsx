@@ -1,14 +1,15 @@
-import { useDispatch } from "react-redux"
+import React from 'react';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import Form from "./Form"
 import { setUser } from "store/slices/userSlice"
+import { useAppDispatch } from 'hooks/redux-hooks';
 
 const Login = () => {
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
-	const handleLogin = (email, password) => {
+	const handleLogin = (email: string, password: string) => {
 		const auth = getAuth()
 
 		signInWithEmailAndPassword(auth, email, password)
@@ -17,7 +18,7 @@ const Login = () => {
 					setUser({
 						email: user.email,
 						id: user.uid,
-						token: user.accessToken,
+						token: user.refreshToken,
 					})
 				)
 				navigate("/", { replace: true })

@@ -1,6 +1,11 @@
 import React from "react"
 
-const Form = ({ title, onSubmit }) => {
+interface FormProps {
+	title: string;
+	onSubmit: (email: string, password: string) => void
+}
+
+const Form: React.FC<FormProps> = ({ title, onSubmit }) => {
 	const [email, setEmail] = React.useState("")
 	const [password, setPassword] = React.useState("")
 
